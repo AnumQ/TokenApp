@@ -33,7 +33,7 @@ export default async function TokenList({ search }: TokenListProps) {
       : tokenList;
 
   return (
-    <div className="px-10">
+    <div className="">
       <table className="w-full">
         <thead>
           <tr className="border-b-2 h-20 border-slate-700">

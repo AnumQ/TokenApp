@@ -1,20 +1,26 @@
 import Image from "next/image";
 import { Suspense } from "react";
 import TokenList from "./components/TokenList";
-import Loading from "./components/loading";
+import TokenListSkeleton from "./components/TokenListSkeleton";
+import SearchField from "./components/SearchField";
 
 export const experimental_ppr = true;
 
-export default function Home() {
+interface HomeProps {
+  searchParams: { query: string };
+}
+
+export default function Home({ searchParams }: HomeProps) {
   return (
     <div className="font-sans grid">
       <header></header>
-      <main>
-        <div className="flex justify-center items-center py-10">
+      <main className="p-10">
+        <div className="flex justify-center items-center">
           <h1 className="text-5xl">Overview</h1>
         </div>
-        <Suspense fallback={<Loading />}>
-          <TokenList search={""} />
+        <SearchField />
+        <Suspense fallback={<TokenListSkeleton />}>
+          <TokenList search={searchParams.query} />
         </Suspense>
       </main>
       <footer></footer>

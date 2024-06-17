@@ -1,6 +1,6 @@
-export default function Loading() {
+export default function TokenListSkeleton() {
   return (
-    <div className="px-10">
+    <div className="">
       <table className="w-full">
         <thead>
           <tr className="w-full border-b-2 h-20 border-slate-700">
