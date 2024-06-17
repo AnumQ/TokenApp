@@ -8,7 +8,7 @@ interface TokenListProps {
 
 const API_URL = "https://li.quest/v1/tokens";
 
-export const getTokenList = async () => {
+const getTokenList = async () => {
   const res = await fetch(API_URL);
 
   if (!res.ok) {
