@@ -20,7 +20,7 @@ export const getTokenList = async () => {
   return tokenResponse.tokens["1"];
 };
 
-export default async function TokenList({ search }: TokenListProps) {
+async function TokenList({ search }: TokenListProps) {
   const tokens = await getTokenList();
 
   const tokenList = tokens.slice(0, 100) as Token[];
@@ -49,7 +49,7 @@ export default async function TokenList({ search }: TokenListProps) {
               className="w-100 border-b-2 border-gray-800 h-20"
             >
               <td className="w-4/12 text-center h-full max-w-40">
-                {token.name}
+                <Link href={`token/${token.address}`}>{token.name}</Link>
               </td>
               <td className="w-6/12 text-center max-w-40">{token.address}</td>
               <td className="w-100 flex justify-center h-20 items-center">
@@ -70,3 +70,5 @@ export default async function TokenList({ search }: TokenListProps) {
     </div>
   );
 }
+
+export default TokenList;
