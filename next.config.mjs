@@ -4,6 +4,16 @@ const nextConfig = {
     reactCompiler: true,
     ppr: "incremental",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        port: "",
+        pathname: "/trustwallet/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
