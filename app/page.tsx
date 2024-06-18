@@ -13,17 +13,13 @@ interface HomeProps {
 export default function Home({ searchParams }: HomeProps) {
   return (
     <div className="font-sans grid">
-      <header></header>
-      <main className="p-10">
-        <div className="flex justify-center items-center">
-          <h1 className="text-5xl">Overview</h1>
-        </div>
-        <SearchField />
-        <Suspense fallback={<TokenListSkeleton />}>
-          <TokenList search={searchParams.query} />
-        </Suspense>
-      </main>
-      <footer></footer>
+      <div className="flex justify-center items-center">
+        <h1 className="text-5xl">Overview</h1>
+      </div>
+      <SearchField />
+      <Suspense fallback={<TokenListSkeleton />}>
+        <TokenList search={searchParams.query} />
+      </Suspense>
     </div>
   );
 }
