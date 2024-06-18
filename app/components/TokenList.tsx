@@ -21,16 +21,15 @@ const getTokenList = async () => {
 };
 
 async function TokenList({ search }: TokenListProps) {
-  const tokens = await getTokenList();
+  const tokens = (await getTokenList()) as Token[];
 
-  const tokenList = tokens.slice(0, 100) as Token[];
   const filtered =
     search && search !== ""
-      ? tokenList.filter(
+      ? tokens.filter(
           (token) =>
             search.toLocaleLowerCase() === token.name.toLocaleLowerCase()
         )
-      : tokenList;
+      : tokens;
 
   return (
     <div className="">
