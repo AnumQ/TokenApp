@@ -21,7 +21,7 @@ const getTokenList = async () => {
 };
 
 async function TokenList({ search }: TokenListProps) {
-  const tokens = (await getTokenList()) as Token[];
+  const tokens = (await getTokenList()).slice(0, 20) as Token[];
 
   const filtered =
     search && search !== ""
@@ -42,9 +42,9 @@ async function TokenList({ search }: TokenListProps) {
           </tr>
         </thead>
         <tbody>
-          {filtered.map((token) => (
+          {filtered.map((token, index) => (
             <tr
-              key={token.address}
+              key={`${index}:${token}`}
               className="w-100 border-b-2 border-gray-800 h-20"
             >
               <td className="w-4/12 text-center h-full max-w-40">
@@ -54,20 +54,13 @@ async function TokenList({ search }: TokenListProps) {
                 <Link href={`token/${token.address}`}>{token.address}</Link>
               </td>
               <td className="w-100 flex justify-center h-20 items-center">
-                {token.logoURI !== "" && (
+                {!!token.logoURI && (
                   <Image
                     src={token.logoURI}
                     width={50}
                     height={50}
                     alt={`${token.name} Logo`}
                   />
-                  // <img
-                  //   className=""
-                  //   src={token.logoURI}
-                  //   alt={`${token.name} Logo`}
-                  //   width="50"
-                  //   height="50"
-                  // />
                 )}
               </td>
             </tr>
@@ -79,3 +72,24 @@ async function TokenList({ search }: TokenListProps) {
 }
 
 export default TokenList;
+
+export async function getStaticProps() {
+  try {
+    const tokens = await getTokenList();
+
+    return {
+      props: {
+        tokens,
+      },
+      revalidate: 60, // refresh data every 60 seconds
+    };
+  } catch (error) {
+    console.error("Error fetching token list:", error);
+    return {
+      props: {
+        tokens: [],
+      },
+      revalidate: 60,
+    };
+  }
+}
