@@ -1,5 +1,5 @@
-import { GetTokenResponse } from "../types/GetTokenResponse";
-import { Token } from "../types/Token";
+import { GetTokenResponse } from "../../types/GetTokenResponse";
+import { Token } from "../../types/Token";
 import Link from "next/link";
 import { BASE_URL, PATH_TOKENS } from "@/app/contants";
 import Image from "next/image";

@@ -1,12 +1,23 @@
 "use client";
 import useSWR from "swr";
-import { Token } from "../types/Token";
-import { GetTokenResponse } from "../types/GetTokenResponse";
+import { Token } from "../../types/Token";
+import { GetTokenResponse } from "../../types/GetTokenResponse";
 import Link from "next/link";
 import Image from "next/image";
 import { List, AutoSizer, ListRowProps } from "react-virtualized";
-import { BASE_URL, PATH_TOKENS } from "../contants";
+import { BASE_URL, PATH_TOKENS } from "../../contants";
 import TokenListSkeleton from "./TokenListSkeleton";
+import ListHeaderRow from "./ListHeaderRow";
+import Row from "./Row";
+import ListContainer from "./ListContainer";
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+  AwaitedReactNode,
+} from "react";
+import SearchResults from "./SearchResults";
 
 const fetcher = async (url: string): Promise<Token[]> => {
   const response = await fetch(url);
@@ -23,6 +34,7 @@ const fetcher = async (url: string): Promise<Token[]> => {
     },
     []
   );
+
   return allTokens;
 };
 
@@ -58,51 +70,41 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
     const token = filteredTokens[index];
 
     return (
-      <div
+      <Row
         key={key}
         style={style}
-        className="w-full border-b-2 border-gray-800 h-20 flex"
-      >
-        <div className="w-3/12 text-center flex items-center justify-center">
-          <Link href={`token/${token.address}`}>{token.name}</Link>
-        </div>
-        <div className="w-6/12 text-center flex items-center justify-center">
-          <Link href={`token/${token.address}`}>{token.address}</Link>
-        </div>
-        <div className="w-3/12 flex items-center justify-center">
-          {token.logoURI && (
+        rowNumber={index + 1}
+        name={
+          <Link href={`token/${token.chainId}/${token.address}`}>
+            {token.name}
+          </Link>
+        }
+        address={
+          <Link href={`token/${token.chainId}/${token.address}`}>
+            {token.address}
+          </Link>
+        }
+        logo={
+          !!token.logoURI ? (
             <Image
               src={token.logoURI}
               alt={`${token.name} Logo`}
               width={50}
               height={50}
             />
-          )}
-        </div>
-      </div>
+          ) : (
+            <></>
+          )
+        }
+      />
     );
   };
 
   return (
     <>
-      {!!search && (
-        <div className="mt-4 align-top">
-          <p className="italic">
-            Found <span>{filteredTokens.length}</span> results for term ´
-            <span className="font-bold">{search}</span>´
-          </p>
-        </div>
-      )}
-      <div style={{ height: "80vh" }} className="w-full">
-        <div className="w-full border-b-2 border-gray-800 h-20 flex bg-slate-900 mt-10">
-          <div className="w-3/12 text-center flex items-center justify-center">
-            Name
-          </div>
-          <div className="w-6/12 text-center flex items-center justify-center">
-            Address
-          </div>
-          <div className="w-3/12 flex items-center justify-center">Logo</div>
-        </div>
+      <SearchResults filteredTokens={filteredTokens.length} search={search} />
+      <ListContainer>
+        <ListHeaderRow />
         {tokens && (
           <AutoSizer>
             {({ height, width }) => (
@@ -116,7 +118,7 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
             )}
           </AutoSizer>
         )}
-      </div>
+      </ListContainer>
     </>
   );
 };
