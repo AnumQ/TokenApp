@@ -47,7 +47,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
       {!!searchTerm && isSearching && (
         <div className="flex flex-row items-center pl-5 h-full">
           <p>
-            Searching for: "<span className="italic">{searchTerm}</span>"
+            Searching for: `<span className="italic">{searchTerm}</span>`
           </p>
           <div className="flex ml-2">
             <svg
