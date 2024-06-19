@@ -12,7 +12,8 @@ export default function TokenListSkeleton() {
         <ul>
           {Array.from(Array(12).keys()).map((token) => (
             <Row
-              key={token.toString()}
+              key={`key-${token}`}
+              index={token.toString()}
               style={{}}
               rowNumber={<div className={`${commonClassnames} w-10`}></div>}
               name={<div className={`${commonClassnames} w-40`}></div>}

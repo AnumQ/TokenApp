@@ -71,7 +71,8 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
 
     return (
       <Row
-        key={key}
+        key={`key-${key}`}
+        index={key}
         style={style}
         rowNumber={index + 1}
         name={

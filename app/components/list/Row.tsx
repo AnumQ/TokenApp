@@ -1,5 +1,5 @@
 interface RowType {
-  key?: string;
+  index?: string;
   style?: any;
   rowNumber: number | React.ReactNode;
   name: string | React.ReactNode;
@@ -7,7 +7,7 @@ interface RowType {
   logo: string | React.ReactNode;
 }
 export default function Row({
-  key,
+  index,
   style,
   rowNumber,
   name,
@@ -16,7 +16,7 @@ export default function Row({
 }: RowType) {
   return (
     <div
-      key={key}
+      key={index}
       style={style}
       className={`w-full border-b-2 border-gray-800 h-20 flex`}
     >

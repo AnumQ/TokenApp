@@ -2,7 +2,6 @@
 import { useState } from "react";
 import SearchField from "./components/search/SearchField";
 import TokenListClientSide from "./components/list/TokenListClientSide";
-import TokenListSkeleton from "./components/list/TokenListSkeleton";
 
 export const experimental_ppr = true;
 
@@ -21,7 +20,6 @@ export default function Home({ searchParams }: HomeProps) {
       {/* <Suspense fallback={<TokenListSkeleton />}>
         <TokenList search={searchParams.query} />
       </Suspense> */}
-      {/* <TokenListSkeleton /> */}
       <TokenListClientSide
         search={searchParams.query}
         setIsSearching={setIsSearching}
