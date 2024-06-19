@@ -18,7 +18,7 @@ export default function Row({
     <div
       key={key}
       style={style}
-      className="w-full border-b-2 border-gray-800 h-20 flex"
+      className={`w-full border-b-2 border-gray-800 h-20 flex`}
     >
       <div className="w-1/12 text-left flex items-center justify-center">
         {rowNumber}
