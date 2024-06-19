@@ -4,6 +4,7 @@ import { Token } from "@/app/types/Token";
 import { BASE_URL, PATH_TOKEN, PATH_TOKENS } from "@/app/contants";
 import Image from "next/image";
 import DetailItemView from "@/app/components/detail/DetailItemView";
+import Heading from "@/app/components/overview/Heading";
 
 // Revalidates every 5 seconds
 export const revalidate = 5;
@@ -20,7 +21,7 @@ const getToken = async (
 
   if (!res.ok) {
     if (res.status === 429) {
-      console.log(`${res.status} ${address}`);
+      // console.log(`${res.status} ${address}`);
     }
     return {
       message: "Something went wrong. Try again",
@@ -48,23 +49,27 @@ export default async function Page({ params }: { params: PageProps }) {
   const token = result as Token;
 
   return (
-    <div className="font-sans grid border border-neutral-700 p-10 rounded last:pb-0 max-w-2xl mx-auto">
-      <div className="">
-        <div className="float-right">
-          {!!token.logoURI && (
-            <Image src={token.logoURI} width={50} height={50} alt="logo" />
-          )}
+    <>
+      <Heading title="TOKEN DETAIL" />
+      <div className="h-5"></div>
+      <div className="font-sans grid border border-neutral-700 p-10 rounded last:pb-0 max-w-2xl mx-auto">
+        <div className="">
+          <div className="float-right">
+            {!!token.logoURI && (
+              <Image src={token.logoURI} width={50} height={50} alt="logo" />
+            )}
+          </div>
+          <DetailItemView label="Name" value={token.name} />
         </div>
-        <DetailItemView label="Name" value={token.name} />
+        <DetailItemView label="Address" value={token.address} />
+        <div className="flex flex-row gap-20">
+          <DetailItemView label="Chain" value={token.chainId.toString()} />
+          <DetailItemView label="Symbol" value={token.symbol} />
+          <DetailItemView label="Price (USD)" value={token.priceUSD} />
+        </div>
+        <DetailItemView label="Coin Key" value={token.coinKey} />
       </div>
-      <DetailItemView label="Address" value={token.address} />
-      <div className="flex flex-row gap-20">
-        <DetailItemView label="Chain" value={token.chainId.toString()} />
-        <DetailItemView label="Symbol" value={token.symbol} />
-        <DetailItemView label="Price (USD)" value={token.priceUSD} />
-      </div>
-      <DetailItemView label="Coin Key" value={token.coinKey} />
-    </div>
+    </>
   );
 }
 
@@ -75,7 +80,11 @@ export async function generateStaticParams() {
   const res = await fetch(API_URL);
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data while generating static params");
+    console.error(
+      "Something went wrong when generating static params. Response from server: ",
+      res.statusText
+    );
+    return [];
   }
 
   const tokenResponse = (await res.json()) as GetTokenResponse;

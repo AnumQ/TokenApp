@@ -2,6 +2,7 @@
 import { useState } from "react";
 import SearchField from "./components/search/SearchField";
 import TokenListClientSide from "./components/list/TokenListClientSide";
+import Heading from "./components/overview/Heading";
 
 export const experimental_ppr = true;
 
@@ -12,10 +13,8 @@ interface HomeProps {
 export default function Home({ searchParams }: HomeProps) {
   const [isSearching, setIsSearching] = useState(false);
   return (
-    <div className="font-sans">
-      <div className="flex justify-center items-center">
-        <h1 className="text-2xl">Overview</h1>
-      </div>
+    <>
+      <Heading title={"Overview"} />
       <SearchField isSearching={isSearching} setIsSearching={setIsSearching} />
       {/* <Suspense fallback={<TokenListSkeleton />}>
         <TokenList search={searchParams.query} />
@@ -24,6 +23,6 @@ export default function Home({ searchParams }: HomeProps) {
         search={searchParams.query}
         setIsSearching={setIsSearching}
       />
-    </div>
+    </>
   );
 }
