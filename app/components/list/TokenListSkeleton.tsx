@@ -17,7 +17,7 @@ export default function TokenListSkeleton() {
               style={{}}
               rowNumber={<div className={`${commonClassnames} w-10`}></div>}
               name={<div className={`${commonClassnames} w-40`}></div>}
-              address={<div className={`${commonClassnames} w-80`}></div>}
+              address={<div className={`${commonClassnames} w-7/12`}></div>}
               logo={<div className={`${commonClassnames} w-10`}></div>}
             />
           ))}
