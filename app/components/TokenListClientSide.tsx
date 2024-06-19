@@ -7,7 +7,6 @@ import Image from "next/image";
 import { List, AutoSizer, ListRowProps } from "react-virtualized";
 import { BASE_URL, PATH_TOKENS } from "../contants";
 import TokenListSkeleton from "./TokenListSkeleton";
-import { useSearchParams } from "next/navigation";
 
 const fetcher = async (url: string): Promise<Token[]> => {
   const response = await fetch(url);
@@ -17,8 +16,14 @@ const fetcher = async (url: string): Promise<Token[]> => {
   }
 
   const tokenResponse = (await response.json()) as GetTokenResponse;
-  // Assuming we only want to read from the list of tokens for the key "1" in tokenResponse
-  return tokenResponse.tokens["1"];
+
+  const allTokens = Object.keys(tokenResponse.tokens).reduce(
+    (prev: Token[], curr: string) => {
+      return [...prev, ...tokenResponse.tokens[curr]];
+    },
+    []
+  );
+  return allTokens;
 };
 
 interface TokenListClientSide {
