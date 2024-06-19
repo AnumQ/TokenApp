@@ -2,6 +2,7 @@ import { GetTokenResponse } from "../types/GetTokenResponse";
 import { Token } from "../types/Token";
 import Link from "next/link";
 import { BASE_URL, PATH_TOKENS } from "@/app/contants";
+import Image from "next/image";
 
 interface TokenListProps {
   search: string;
@@ -54,13 +55,19 @@ async function TokenList({ search }: TokenListProps) {
               </td>
               <td className="w-100 flex justify-center h-20 items-center">
                 {token.logoURI !== "" && (
-                  <img
-                    className=""
+                  <Image
                     src={token.logoURI}
+                    width={50}
+                    height={50}
                     alt={`${token.name} Logo`}
-                    width="50"
-                    height="50"
                   />
+                  // <img
+                  //   className=""
+                  //   src={token.logoURI}
+                  //   alt={`${token.name} Logo`}
+                  //   width="50"
+                  //   height="50"
+                  // />
                 )}
               </td>
             </tr>
