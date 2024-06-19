@@ -13,7 +13,10 @@ export default function TokenListSkeleton() {
         </div>
         <ul>
           {Array.from(Array(30).keys()).map((token) => (
-            <li className="flex flex-row h-20 border-b-2 border-gray-800">
+            <li
+              key={token}
+              className="flex flex-row h-20 border-b-2 border-gray-800"
+            >
               <div className="w-3/12 animate-pulse bg-white-200 m-auto">
                 <div className="h-10 bg-slate-700 rounded w-20 mx-auto"></div>
               </div>
