@@ -1,6 +1,7 @@
 import { TError } from "@/app/types/TError";
 import { GetTokenResponse } from "@/app/types/GetTokenResponse";
 import { Token } from "@/app/types/Token";
+import { BASE_URL, PATH_TOKEN, PATH_TOKENS } from "@/app/contants";
 
 // Revalidates every 5 seconds
 export const revalidate = 5;
@@ -11,7 +12,7 @@ const getToken = async (
   chainId: number,
   address: string
 ): Promise<Token | TError> => {
-  const API_URL = `https://li.quest/v1/token?chain=${chainId}&token=${address}`;
+  const API_URL = `${BASE_URL}/${PATH_TOKEN}?chain=${chainId}&token=${address}`;
 
   const res = await fetch(API_URL);
   if (!res.ok) {
@@ -28,7 +29,7 @@ const getToken = async (
 
 // Will generate static pages during build
 export async function generateStaticParams() {
-  const API_URL = "https://li.quest/v1/tokens";
+  const API_URL = `${BASE_URL}/${PATH_TOKENS}`;
 
   const res = await fetch(API_URL);
 

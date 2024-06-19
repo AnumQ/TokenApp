@@ -1,15 +1,14 @@
 import { GetTokenResponse } from "../types/GetTokenResponse";
 import { Token } from "../types/Token";
 import Link from "next/link";
+import { BASE_URL, PATH_TOKENS } from "@/app/contants";
 
 interface TokenListProps {
   search: string;
 }
 
-const API_URL = "https://li.quest/v1/tokens";
-
 const getTokenList = async () => {
-  const res = await fetch(API_URL);
+  const res = await fetch(`${BASE_URL}/${PATH_TOKENS}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -50,7 +49,9 @@ async function TokenList({ search }: TokenListProps) {
               <td className="w-4/12 text-center h-full max-w-40">
                 <Link href={`token/${token.address}`}>{token.name}</Link>
               </td>
-              <td className="w-6/12 text-center max-w-40">{token.address}</td>
+              <td className="w-6/12 text-center max-w-40">
+                <Link href={`token/${token.address}`}>{token.address}</Link>
+              </td>
               <td className="w-100 flex justify-center h-20 items-center">
                 {token.logoURI !== "" && (
                   <img
