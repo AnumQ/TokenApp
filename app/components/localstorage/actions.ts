@@ -34,4 +34,4 @@ const updateFavorites = (newFavorite: boolean, favoriteId: string) => {
   }
 };
 
-export { isCurentTokenFavorite, updateFavorites };
+export { isCurentTokenFavorite, updateFavorites, getFavorites };

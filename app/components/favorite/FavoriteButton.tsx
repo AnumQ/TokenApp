@@ -10,12 +10,14 @@ type FavoriteButtonType = {
   chainId: string;
   address: string;
   withBackground?: boolean;
+  onUpdate?: () => void;
 };
 
 function FavoriteButton({
   chainId,
   address,
   withBackground = false,
+  onUpdate,
 }: FavoriteButtonType) {
   const [isFavorite, setIsFavorite] = useState<boolean | undefined>(undefined);
 
@@ -30,6 +32,7 @@ function FavoriteButton({
     const newFavorite = !isFavorite;
     updateFavorites(newFavorite, favoriteId);
     setIsFavorite(newFavorite);
+    if (onUpdate) onUpdate();
   };
 
   return (

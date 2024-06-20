@@ -12,6 +12,8 @@ import Row from "./Row";
 import ListContainer from "./ListContainer";
 import SearchResults from "./SearchResults";
 import FavoriteButton from "../favorite/FavoriteButton";
+import { useState } from "react";
+import { sortOnFavorites } from "./actions";
 
 const fetcher = async (url: string): Promise<Token[]> => {
   const response = await fetch(url);
@@ -45,19 +47,22 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
     isLoading,
   } = useSWR<Token[]>(`${BASE_URL}/${PATH_TOKENS}`, fetcher);
 
+  const [_, setUpdate] = useState(0);
+
   if (error) return <div>Failed to load</div>;
   if (isLoading) return <TokenListSkeleton />;
   if (!tokens) return <div>No tokens found</div>;
 
-  const filteredTokens =
-    search && search !== ""
-      ? tokens.filter((token) =>
-          token.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-        )
-      : tokens;
+  const filterSearch = search
+    ? tokens.filter((token) =>
+        token.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      )
+    : tokens;
+
+  const sortedTokens = sortOnFavorites(filterSearch);
 
   const rowRenderer: React.FC<ListRowProps> = ({ key, index, style }) => {
-    const token = filteredTokens[index];
+    const token = sortedTokens[index];
 
     return (
       <Row
@@ -90,6 +95,11 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
             withBackground
             chainId={token.chainId.toString()}
             address={token.address}
+            onUpdate={() => {
+              setUpdate((prev) => {
+                return prev + 1;
+              });
+            }}
           />
         }
       />
@@ -98,7 +108,7 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
 
   return (
     <>
-      <SearchResults filteredTokens={filteredTokens.length} search={search} />
+      <SearchResults filteredTokens={sortedTokens.length} search={search} />
       <ListContainer>
         <ListHeaderRow />
         {tokens && (
@@ -107,8 +117,8 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
               <List
                 height={height}
                 width={width}
-                rowCount={filteredTokens.length}
-                rowHeight={80} // Adjust row height as needed
+                rowCount={sortedTokens.length}
+                rowHeight={80}
                 rowRenderer={rowRenderer}
               />
             )}
