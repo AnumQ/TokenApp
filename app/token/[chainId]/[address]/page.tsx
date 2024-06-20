@@ -1,11 +1,7 @@
 import { TError } from "@/app/types/TError";
 import { GetTokenResponse } from "@/app/types/GetTokenResponse";
 import { Token } from "@/app/types/Token";
-import {
-  BASE_URL,
-  PATH_TOKEN,
-  PATH_TOKENS,
-} from "@/app/contants";
+import { BASE_URL, PATH_TOKEN, PATH_TOKENS } from "@/app/contants";
 import Image from "next/image";
 import DetailItemView from "@/app/components/detail/DetailItemView";
 import Heading from "@/app/components/overview/Heading";

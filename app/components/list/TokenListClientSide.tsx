@@ -11,6 +11,7 @@ import ListHeaderRow from "./ListHeaderRow";
 import Row from "./Row";
 import ListContainer from "./ListContainer";
 import SearchResults from "./SearchResults";
+import FavoriteButton from "../favorite/FavoriteButton";
 
 const fetcher = async (url: string): Promise<Token[]> => {
   const response = await fetch(url);
@@ -75,16 +76,21 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
           </Link>
         }
         logo={
-          !!token.logoURI ? (
+          !!token.logoURI && (
             <Image
               src={token.logoURI}
               alt={`${token.name} Logo`}
               width={50}
               height={50}
             />
-          ) : (
-            <></>
           )
+        }
+        favorite={
+          <FavoriteButton
+            withBackground
+            chainId={token.chainId.toString()}
+            address={token.address}
+          />
         }
       />
     );

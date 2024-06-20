@@ -5,19 +5,16 @@ const updateLocalStorage = (data: FavoriteToken[]) => {
   localStorage.setItem(FAVORITE_LOCAL_STORAGE_KEY, JSON.stringify(data));
 };
 
-export const isCurentTokenFavorite = (favoriteId: string): boolean => {
-  return getFavorites().some((fav: string) => fav === favoriteId);
-};
-
-export const getFavorites = (): FavoriteToken[] => {
+const getFavorites = (): FavoriteToken[] => {
   return JSON.parse(localStorage.getItem(FAVORITE_LOCAL_STORAGE_KEY) || "[]");
 };
 
-export const updateFavorites = (
-  newFavorite: boolean,
-  favorites: FavoriteToken[],
-  favoriteId: string
-) => {
+const isCurentTokenFavorite = (favoriteId: string): boolean => {
+  return getFavorites().some((fav: string) => fav === favoriteId);
+};
+
+const updateFavorites = (newFavorite: boolean, favoriteId: string) => {
+  const favorites = getFavorites();
   if (newFavorite) {
     const isFavAlreadySaved =
       favorites.filter((fav) => fav === favoriteId).length === 0;
@@ -36,3 +33,5 @@ export const updateFavorites = (
     }
   }
 };
+
+export { isCurentTokenFavorite, updateFavorites };

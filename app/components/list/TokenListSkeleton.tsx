@@ -19,6 +19,7 @@ export default function TokenListSkeleton() {
               name={<div className={`${commonClassnames} w-6/12`}></div>}
               address={<div className={`${commonClassnames} w-7/12`}></div>}
               logo={<div className={`${commonClassnames} w-10`}></div>}
+              favorite={<div className={`${commonClassnames} w-10`}></div>}
             />
           ))}
         </ul>
