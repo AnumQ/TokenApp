@@ -1,6 +1,6 @@
-const favfillColor = "#d3bb51";
-const favStroke = "b8a13c";
-const defaultStroke = "white";
+const favfillColor = "#443084";
+const favStroke = "#443084";
+const defaultStroke = "#525252";
 
 const StarIcon = ({ isFavorite }: { isFavorite: boolean }) => (
   <svg
@@ -8,8 +8,7 @@ const StarIcon = ({ isFavorite }: { isFavorite: boolean }) => (
     fill={`${isFavorite ? favfillColor : ""}`}
     viewBox="0 0 24 24"
     strokeWidth={1.5}
-    stroke={`${isFavorite ? favStroke : "white"}`}
-    // className="size-12"
+    stroke={`${isFavorite ? favStroke : defaultStroke}`}
     className={`size-12 transition-fill duration-500 ease-in-out ${
       isFavorite ? `${favfillColor} ${favStroke}` : `${defaultStroke}`
     }`}

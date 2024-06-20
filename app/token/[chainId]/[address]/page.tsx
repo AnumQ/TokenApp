@@ -3,7 +3,6 @@ import { GetTokenResponse } from "@/app/types/GetTokenResponse";
 import { Token } from "@/app/types/Token";
 import {
   BASE_URL,
-  FAVORITE_LOCAL_STORAGE_KEY,
   PATH_TOKEN,
   PATH_TOKENS,
 } from "@/app/contants";
@@ -76,7 +75,7 @@ export default async function Page({ params }: { params: PageProps }) {
           <DetailItemView label="Coin Key" value={token.coinKey} />
         </div>
         <div className="">
-          <FavoriteButton />
+          <FavoriteButton chainId={chainId} address={address} />
         </div>
       </div>
     </>
