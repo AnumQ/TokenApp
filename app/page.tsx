@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import SearchField from "./components/search/SearchField";
 import TokenListClientSide from "./components/list/TokenListClientSide";
 import Heading from "./components/overview/Heading";
@@ -11,18 +10,14 @@ interface HomeProps {
 }
 
 export default function Home({ searchParams }: HomeProps) {
-  const [isSearching, setIsSearching] = useState(false);
   return (
     <>
       <Heading title={"Overview"} />
-      <SearchField isSearching={isSearching} setIsSearching={setIsSearching} />
+      <SearchField />
       {/* <Suspense fallback={<TokenListSkeleton />}>
         <TokenList search={searchParams.query} />
       </Suspense> */}
-      <TokenListClientSide
-        search={searchParams.query}
-        setIsSearching={setIsSearching}
-      />
+      <TokenListClientSide search={searchParams.query} />
     </>
   );
 }

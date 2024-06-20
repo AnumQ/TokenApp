@@ -10,13 +10,6 @@ import TokenListSkeleton from "./TokenListSkeleton";
 import ListHeaderRow from "./ListHeaderRow";
 import Row from "./Row";
 import ListContainer from "./ListContainer";
-import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  ReactPortal,
-  AwaitedReactNode,
-} from "react";
 import SearchResults from "./SearchResults";
 
 const fetcher = async (url: string): Promise<Token[]> => {
@@ -40,12 +33,10 @@ const fetcher = async (url: string): Promise<Token[]> => {
 
 interface TokenListClientSide {
   search: string;
-  setIsSearching: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const TokenListClientSide: React.FC<TokenListClientSide> = ({
   search,
-  setIsSearching,
 }: TokenListClientSide) => {
   const {
     data: tokens,
@@ -63,8 +54,6 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
           token.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
       : tokens;
-
-  setIsSearching(false);
 
   const rowRenderer: React.FC<ListRowProps> = ({ key, index, style }) => {
     const token = filteredTokens[index];

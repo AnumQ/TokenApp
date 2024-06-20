@@ -5,15 +5,10 @@ import { useDebounce } from "use-debounce";
 import { useSearchParams } from "next/navigation";
 import LoadingDots from "./LoadingDots";
 
-interface SearchFieldProps {
-  isSearching: boolean;
-  setIsSearching: React.Dispatch<React.SetStateAction<boolean>>;
-}
+interface SearchFieldProps {}
 
-const SearchField: React.FC<SearchFieldProps> = ({
-  isSearching,
-  setIsSearching,
-}: SearchFieldProps) => {
+const SearchField: React.FC<SearchFieldProps> = ({}: SearchFieldProps) => {
+  const [isSearching, setIsSearching] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const searchParams = useSearchParams();
   const [query] = useDebounce(searchTerm, 500);
@@ -33,6 +28,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
       }
     }
     replace(`${pathname}?${params.toString()}`);
+    setIsSearching(false);
   }, [query]);
 
   return (
