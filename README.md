@@ -3,7 +3,7 @@
 ### Install dependencies
 
 ```bash
-npm i
+npm i --legacy-peer-deps
 ```
 
 ### Run the development server:
