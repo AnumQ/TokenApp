@@ -3,7 +3,7 @@ import ListHeaderRow from "./ListHeaderRow";
 import Row from "./Row";
 
 export default function TokenListSkeleton() {
-  const commonClassnames = "h-8 bg-slate-800 rounded";
+  const commonClassnames = "h-8 bg-slate-800 rounded animate-pulse";
   return (
     <>
       <div className="mt-4 h-10"></div>
