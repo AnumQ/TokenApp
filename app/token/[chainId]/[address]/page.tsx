@@ -5,11 +5,17 @@ import { BASE_URL, PATH_TOKEN, PATH_TOKENS } from "@/app/contants";
 import Image from "next/image";
 import DetailItemView from "@/app/components/detail/DetailItemView";
 import Heading from "@/app/components/overview/Heading";
+import { Metadata } from "next";
 
 // Revalidates every 5 seconds
 export const revalidate = 5;
 
 export const dynamicParams = false;
+
+export const metadata: Metadata = {
+  title: "Token Details",
+  description: "View token details",
+};
 
 const getToken = async (
   chainId: string,
@@ -20,9 +26,6 @@ const getToken = async (
   const res = await fetch(API_URL);
 
   if (!res.ok) {
-    if (res.status === 429) {
-      // console.log(`${res.status} ${address}`);
-    }
     return {
       message: "Something went wrong. Try again",
     };
