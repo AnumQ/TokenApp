@@ -1,4 +1,3 @@
-"use client";
 import SearchField from "./components/search/SearchField";
 import TokenListClientSide from "./components/list/TokenListClientSide";
 import Heading from "./components/overview/Heading";
