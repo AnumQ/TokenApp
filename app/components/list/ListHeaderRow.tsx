@@ -2,7 +2,13 @@ import Row from "./Row";
 
 function ListHeaderRow() {
   return (
-    <Row rowNumber={"#"} name={"Name"} address={"Address"} logo={"Logo"}></Row>
+    <Row
+      rowNumber={"#"}
+      name={"Name"}
+      address={"Address"}
+      logo={"Logo"}
+      favorite={"Favorites"}
+    ></Row>
   );
 }
 

@@ -5,6 +5,7 @@ interface RowType {
   name: string | React.ReactNode;
   address: string | React.ReactNode;
   logo: string | React.ReactNode;
+  favorite: string | React.ReactNode;
 }
 export default function Row({
   index,
@@ -13,6 +14,7 @@ export default function Row({
   name,
   address,
   logo,
+  favorite,
 }: RowType) {
   return (
     <div
@@ -30,6 +32,7 @@ export default function Row({
         {address}
       </div>
       <div className="w-3/12 flex items-center justify-center">{logo}</div>{" "}
+      <div className="w-3/12 flex items-center justify-center">{favorite}</div>{" "}
     </div>
   );
 }
