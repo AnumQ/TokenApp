@@ -39,7 +39,9 @@ function FavoriteButton({
     <button
       onClick={toggleFavorite}
       className={`float-right ${
-        !withBackground ? "bg-zinc-900 hover:bg-zinc-800" : ""
+        withBackground
+          ? "dark:bg-zinc-900 dark:hover:bg-zinc-800 bg-zinc-100 hover:bg-zinc-200 "
+          : ""
       } h-20 w-20 flex items-center justify-center rounded-3xl`}
     >
       {isFavorite === undefined && (

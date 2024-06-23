@@ -34,7 +34,7 @@ const SearchField: React.FC<SearchFieldProps> = ({}: SearchFieldProps) => {
   return (
     <div className="flex flex-row h-10">
       <input
-        className="text-gray-800 p-3 h-full"
+        className="text-gray-800 border b-2 border-slate-300 rounded p-3 h-full"
         type="text"
         placeholder="Search tokens..."
         value={searchTerm}
@@ -47,7 +47,10 @@ const SearchField: React.FC<SearchFieldProps> = ({}: SearchFieldProps) => {
       {isSearching && (
         <div className="flex flex-row items-center pl-5 h-full space-x-2">
           <p className="text-zinc-400">
-            Searching for <span className="text-slate-100">{searchTerm}</span>
+            Searching for{" "}
+            <span className="text-slate-900 dark:text-slate-100">
+              {searchTerm}
+            </span>
           </p>
           <LoadingDots />
         </div>

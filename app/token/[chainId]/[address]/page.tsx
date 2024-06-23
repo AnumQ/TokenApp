@@ -74,7 +74,7 @@ export default async function Page({ params }: { params: PageProps }) {
           <DetailItemView label="Coin Key" value={token.coinKey} />
         </div>
         <div className="">
-          <FavoriteButton chainId={chainId} address={address} />
+          <FavoriteButton withBackground chainId={chainId} address={address} />
         </div>
       </div>
     </>

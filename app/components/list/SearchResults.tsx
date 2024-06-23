@@ -8,14 +8,21 @@ function SearchResults({ filteredTokens, search }: SearchResultsType) {
     <div className="mt-4 h-10">
       {filteredTokens > 0 && !search && (
         <p className="text-zinc-400">
-          Displaying <i className="text-slate-100">{filteredTokens} </i> tokens
+          Displaying{" "}
+          <i className="dark:text-slate-100 font-semibold text-gray-900">
+            {filteredTokens}{" "}
+          </i>{" "}
+          tokens
         </p>
       )}
       {!!search && (
         <p className="text-zinc-400">
-          Found <i className="text-slate-100">{filteredTokens} </i> tokens with
-          name{" "}
-          <span className="font-bold text-slate-100 font-serif italic">
+          Found{" "}
+          <i className="dark:text-slate-100 font-semibold text-slate-900">
+            {filteredTokens}{" "}
+          </i>{" "}
+          tokens with name{" "}
+          <span className="font-bold dark:text-slate-100 text-slate-900 font-serif italic">
             {search}
           </span>
         </p>

@@ -92,7 +92,6 @@ const TokenListClientSide: React.FC<TokenListClientSide> = ({
         }
         favorite={
           <FavoriteButton
-            withBackground
             chainId={token.chainId.toString()}
             address={token.address}
             onUpdate={() => {
